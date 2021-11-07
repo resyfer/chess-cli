@@ -2,8 +2,12 @@
 #define BLACK 1
 #define NO_COLOR 2
 
+/* History of the played moves in the match */
+std::vector<std::string> playedMoves;
+
+/* Identification of Piece */
 int colorValue (int pieceValue) {
-  if(pieceValue)  
+  if(pieceValue)
     return (pieceValue & 8) ? BLACK : WHITE;
   else
     return NO_COLOR;
@@ -12,3 +16,190 @@ int colorValue (int pieceValue) {
 int pieceIndex(int pieceValue) {
   return (pieceValue % 8);
 }
+
+/* Legal Moves */
+std::vector<std::vector<int>> noColorMoves(
+  std::array<std::array<int, 8>, 8> &board,
+  int rank,
+  char file
+) {
+  std::vector<std::vector<int>> moves;
+  return moves;
+}
+
+std::vector<std::vector<int>> pawnMoves(
+  std::array<std::array<int, 8>, 8> &board,
+  int rank,
+  char file
+) {
+  std::vector<std::vector<int>> moves;
+  return moves;
+}
+
+std::vector<std::vector<int>> rookMoves(
+  std::array<std::array<int, 8>, 8> &board,
+  int rank,
+  char file
+) {
+  std::vector<std::vector<int>> moves;
+
+  int elementValue = board[8 - rank][int(file - 'a')];
+
+  //down
+  for(int i = 8 - rank + 1; i<8; i++) {
+    if(board[i][int(file - 'a')] == 0)
+      moves.push_back({i, int(file - 'a')});
+    else if (colorValue(board[i][int(file - 'a')]) == colorValue(elementValue))
+      break;
+    else {
+      moves.push_back({i, int(file - 'a')});
+      break;
+    }
+  }
+
+  //up
+  for(int i = 8 - rank - 1; i>=0; i--) {
+    if(board[i][int(file - 'a')] == 0)
+      moves.push_back({i, int(file - 'a')});
+    else if (colorValue(board[i][int(file - 'a')]) == colorValue(elementValue))
+      break;
+    else {
+      moves.push_back({i, int(file - 'a')});
+      break;
+    }
+  }
+  
+  //right
+  for(int i = int(file - 'a') + 1; i<8; i++) {
+    if(board[8 - rank][i] == 0)
+      moves.push_back({(8 - rank), i});
+    else if (colorValue(board[8 - rank][i]) == colorValue(elementValue))
+      break;
+    else {
+      moves.push_back({(8 - rank), i});
+      break;
+    }
+  }
+
+  //left
+  for(int i = int(file - 'a') - 1; i>=0; i--) {
+    if(board[8 - rank][i] == 0)
+      moves.push_back({(8 - rank), i});
+    else if (colorValue(board[8 - rank][i]) == colorValue(elementValue))
+      break;
+    else {
+      moves.push_back({(8 - rank), i});
+      break;
+    }
+  }
+
+  return moves;
+}
+
+std::vector<std::vector<int>> knightMoves(
+  std::array<std::array<int, 8>, 8> &board,
+  int rank,
+  char file
+) {
+  std::vector<std::vector<int>> moves;
+  return moves;
+}
+
+std::vector<std::vector<int>> bishopMoves(
+  std::array<std::array<int, 8>, 8> &board,
+  int rank,
+  char file
+) {
+  std::vector<std::vector<int>> moves;
+
+  int elementValue = board[8 - rank][int(file - 'a')];
+
+  //down-right
+  for(int i = 1; 8 - rank + i < 8 && int(file - 'a') + i < 8; i++) {
+    if(board[8 - rank + i][int(file - 'a') + i] == 0)
+      moves.push_back({8 - rank + i, int(file - 'a') + i});
+    else if (colorValue(board[8 - rank + i][int(file - 'a') + i]) == colorValue(elementValue))
+      break;
+    else {
+      moves.push_back({8 - rank + i, int(file - 'a') + i});
+      break;
+    }
+  }
+
+  //down-left
+  for(int i = 1; 8 - rank + i < 8 && int(file - 'a') - i >=0; i++) {
+    if(board[8 - rank + i][int(file - 'a') - i] == 0)
+      moves.push_back({8 - rank + i, int(file - 'a') - i});
+    else if (colorValue(board[8 - rank + i][int(file - 'a') - i]) == colorValue(elementValue))
+      break;
+    else {
+      moves.push_back({8 - rank + i, int(file - 'a') - i});
+      break;
+    }
+  }
+
+  //up-right
+  for(int i = 1; 8 - rank - i >= 0 && int(file - 'a') + i < 8; i++) {
+    if(board[8 - rank - i][int(file - 'a') + i] == 0)
+      moves.push_back({8 - rank - i, int(file - 'a') + i});
+    else if (colorValue(board[8 - rank - i][int(file - 'a') + i]) == colorValue(elementValue))
+      break;
+    else {
+      moves.push_back({8 - rank - i, int(file - 'a') + i});
+      break;
+    }
+  }
+
+  //up-left
+  for(int i = 1; 8 - rank - i >= 0 && int(file - 'a') - i >=0; i++) {
+    if(board[8 - rank - i][int(file - 'a') - i] == 0)
+      moves.push_back({8 - rank - i, int(file - 'a') - i});
+    else if (colorValue(board[8 - rank - i][int(file - 'a') - i]) == colorValue(elementValue))
+      break;
+    else {
+      moves.push_back({8 - rank - i, int(file - 'a') - i});
+      break;
+    }
+  }
+
+  return moves;
+}
+
+std::vector<std::vector<int>> queenMoves(
+  std::array<std::array<int, 8>, 8> &board,
+  int rank,
+  char file
+) {
+  std::vector<std::vector<int>> moves;
+
+  // Queen's Moves = Rook's Moves + Bishop's Moves
+  std::vector<std::vector<int>> straightMoves = rookMoves(board, rank, file);
+  std::vector<std::vector<int>> diagonalMoves = bishopMoves(board, rank, file);
+
+  moves.insert(moves.end(), straightMoves.begin(), straightMoves.end());
+  moves.insert(moves.end(), diagonalMoves.begin(), diagonalMoves.end());
+  return moves;
+}
+
+std::vector<std::vector<int>> kingMoves(
+  std::array<std::array<int, 8>, 8> &board,
+  int rank,
+  char file
+) {
+  std::vector<std::vector<int>> moves;
+  return moves;
+}
+
+std::vector<std::vector<int>> (*legalMovesFunctions[7])(
+  std::array<std::array<int, 8>, 8> &board,
+  int rank,
+  char file
+) = {
+  noColorMoves, //0
+  pawnMoves,    //1
+  rookMoves,    //2
+  knightMoves,  //3
+  bishopMoves,  //4
+  queenMoves,   //5
+  kingMoves     //6
+};
