@@ -102,6 +102,46 @@ std::vector<std::vector<int>> knightMoves(
   char file
 ) {
   std::vector<std::vector<int>> moves;
+
+  int elementValue = board[8 - rank][int(file - 'a')];
+  
+  /**
+   * Knight moves as indexes:
+   * 
+   *    0--|--1
+   *  2----|----3
+   *       N
+   *  4----|----5
+   *    6--|--7
+   */
+
+  std::vector<std::vector<int>> positions = {
+    {-2, -1},   //0
+    {-2, +1},   //1
+    {-1, -2},   //2
+    {-1, +2},   //3
+    {+1, -2},   //4
+    {+1, +2},   //5
+    {+2, -1},   //6
+    {+2, +1}    //7
+  };
+
+  for(int i = 0; i<positions.size(); i++) {
+
+    if( //Check Limits to keep positions inside board
+      (8 - rank + positions[i][0] >= 0) && (8 - rank + positions[i][0] < 8) &&
+      (int(file - 'a') + positions[i][1] >= 0) && (int(file - 'a') + positions[i][1] < 8)
+    ) {
+
+      if( //Move Legal if empty space or opponent piece
+        board[8 - rank + positions[i][0]][int(file - 'a') + positions[i][1]] == 0 ||
+        colorValue(board[8 - rank + positions[i][0]][int(file - 'a') + positions[i][1]]) != colorValue(elementValue)
+      ) {
+        moves.push_back({8 - rank + positions[i][0], int(file - 'a') + positions[i][1]});
+      }
+    }
+
+  }
   return moves;
 }
 
