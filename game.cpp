@@ -38,7 +38,7 @@ int main() {
 
   printBoard(board);
 
-  std::vector<std::vector<int>> moves = legalMovesFunctions[3](board, 1, 'b');
+  std::vector<std::vector<int>> moves = legalMovesFunctions[1](board, 2, 'd');
   for(int i = 0; i<moves.size(); i++) {
     std::cout<<(8 - moves[i][0])<<" "<<char(moves[i][1] + 'a')<<std::endl;
   }

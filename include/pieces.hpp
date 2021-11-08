@@ -18,12 +18,14 @@ int pieceIndex(int pieceValue) {
 }
 
 /* Legal Moves */
+
+//Placeholder function for index 0 to match the index with piece values
 std::vector<std::vector<int>> noColorMoves(
   std::array<std::array<int, 8>, 8> &board,
   int rank,
   char file
 ) {
-  std::vector<std::vector<int>> moves;
+  std::vector<std::vector<int>> moves = {};
   return moves;
 }
 
@@ -33,6 +35,50 @@ std::vector<std::vector<int>> pawnMoves(
   char file
 ) {
   std::vector<std::vector<int>> moves;
+
+  int elementValue = board[8 - rank][int(file - 'a')];
+
+  //Black moves below, so +ve multiplier. White, above, -ve multiplier
+  int multiplierSign = (colorValue(elementValue) == BLACK) ? +1 : -1;
+
+  // up moves for white, down moves for black
+  if(
+    board[8 - rank + (multiplierSign * 1)][int(file - 'a')] == 0
+  ) {
+    //1-up or 1-down
+    moves.push_back({8 - rank + (multiplierSign * 1), int(file - 'a')});
+
+    //2-up or 2-down only if 1-up or 1-down available
+    if(
+      ((multiplierSign == 1 && rank == 7) || (multiplierSign == -1 && rank == 2)) &&
+      board[8 - rank + (multiplierSign * 2)][int(file - 'a')] == 0
+    ) {
+      moves.push_back({8 - rank + (multiplierSign * 2), int(file - 'a')});
+    }
+  }
+
+  // 1-up-&-1-right or 1-down-&-1-right
+  if(
+    8 - rank + (multiplierSign * 1) >= 0 && 8 - rank + (multiplierSign * 1) < 8 &&
+    int(file - 'a') + 1 < 8 &&
+    colorValue(board[8 - rank + (multiplierSign * 1)][int(file - 'a') + 1]) != NO_COLOR &&
+    colorValue(board[8 - rank + (multiplierSign * 1)][int(file - 'a') + 1]) != colorValue(elementValue)
+  ) {
+    moves.push_back({8 - rank + (multiplierSign * 1), int(file - 'a') + 1});
+  }
+
+  // 1-up-&-1-left or 1-down-&-1-left
+  if(
+    8 - rank + (multiplierSign * 1) >= 0 && 8 - rank + (multiplierSign * 1) < 8 &&
+    int(file - 'a') - 1 >= 0 &&
+    colorValue(board[8 - rank + (multiplierSign * 1)][int(file - 'a') - 1]) != NO_COLOR &&
+    colorValue(board[8 - rank + (multiplierSign * 1)][int(file - 'a') - 1]) != colorValue(elementValue)
+  ) {
+    moves.push_back({8 - rank + (multiplierSign * 1), int(file - 'a') - 1});
+  }
+
+  //TODO: En passant
+
   return moves;
 }
 

@@ -78,22 +78,22 @@ void initializeBoard(std::array<std::array<int, 8>, 8> &board) {
   addPiece(board, "Black", "Pawn", 7, 'h');
 
   //White
-  // addPiece(board, "White", "Rook", 1, 'a');
+  addPiece(board, "White", "Rook", 1, 'a');
   addPiece(board, "White", "Knight", 1, 'b');
-  // addPiece(board, "White", "Bishop", 1, 'c');
-  // addPiece(board, "White", "Queen", 1, 'd');
-  // addPiece(board, "White", "King", 1, 'e');
-  // addPiece(board, "White", "Bishop", 1, 'f');
-  // addPiece(board, "White", "Knight", 1, 'g');
-  // addPiece(board, "White", "Rook", 1, 'h');
-  // addPiece(board, "White", "Pawn", 2, 'a');
-  // addPiece(board, "White", "Pawn", 2, 'b');
-  // addPiece(board, "White", "Pawn", 2, 'c');
-  // addPiece(board, "White", "Pawn", 2, 'd');
-  // addPiece(board, "White", "Pawn", 2, 'e');
-  // addPiece(board, "White", "Pawn", 2, 'f');
-  // addPiece(board, "White", "Pawn", 2, 'g');
-  // addPiece(board, "White", "Pawn", 2, 'h');
+  addPiece(board, "White", "Bishop", 1, 'c');
+  addPiece(board, "White", "Queen", 1, 'd');
+  addPiece(board, "White", "King", 1, 'e');
+  addPiece(board, "White", "Bishop", 1, 'f');
+  addPiece(board, "White", "Knight", 1, 'g');
+  addPiece(board, "White", "Rook", 1, 'h');
+  addPiece(board, "White", "Pawn", 2, 'a');
+  addPiece(board, "White", "Pawn", 2, 'b');
+  addPiece(board, "White", "Pawn", 2, 'c');
+  addPiece(board, "White", "Pawn", 2, 'd');
+  addPiece(board, "White", "Pawn", 2, 'e');
+  addPiece(board, "White", "Pawn", 2, 'f');
+  addPiece(board, "White", "Pawn", 2, 'g');
+  addPiece(board, "White", "Pawn", 2, 'h');
 }
 
 void printBoard(std::array<std::array<int, 8>, 8> board) {
