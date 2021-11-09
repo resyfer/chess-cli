@@ -273,9 +273,48 @@ std::vector<std::vector<int>> kingMoves(
   char file
 ) {
   std::vector<std::vector<int>> moves;
+
+  int elementValue = board[8 - rank][int(file - 'a')];
+
+  //TODO: Castling
+
+  /**
+   * King moves as indexes:
+   * 
+   * 0 1 2
+   * 3 K 4
+   * 5 6 7
+   * 
+   */
+
+  std::vector<std::vector<int>> positions = {
+    {-1, -1},   //0
+    {-1,  0},   //1
+    {-1, +1},   //2
+    { 0, -1},   //3
+    { 0, +1},   //4
+    {+1, -1},   //5
+    {+1,  0},   //6
+    {+1, +1},   //7
+  };
+
+  for(int i = 0; i<positions.size(); i++) {
+    if(
+      0 <= 8 - rank + positions[i][0] && 8 - rank + positions[i][0] < 8 &&
+      0 <= int(file - 'a') + positions[i][1] && int(file - 'a') + positions[i][1] < 8
+    ) {
+      if(
+        colorValue(board[8 - rank + positions[i][0]][int(file - 'a') + positions[i][1]]) !=
+        colorValue(elementValue)
+      ) {
+        moves.push_back({8 - rank + positions[i][0], int(file - 'a') + positions[i][1]});
+      }
+    }
+  }
   return moves;
 }
 
+// Array to call functions based on the chess piece's index
 std::vector<std::vector<int>> (*legalMovesFunctions[7])(
   std::array<std::array<int, 8>, 8> &board,
   int rank,

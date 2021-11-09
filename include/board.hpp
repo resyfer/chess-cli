@@ -20,7 +20,7 @@ std::array<std::string, 2> colorTypes = {
   "Black"
 };
 
-// Only for Printing Purposes
+// Only for Printing Board Purpose
 std::array<std::string, 7> pieceDisplay = {
   "|      ",
   "| Pawn ",
