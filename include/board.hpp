@@ -1,62 +1,7 @@
-#include "pieces.hpp"
+#include "commands.hpp"
 
-/**
- * Last 3 bits of pieceValue shows
- * piece according to pieceTypes's index
- * 
- * 4th bit from last shows color according to the #define
- */
-std::array<std::string, 7> pieceTypes = {
-  "",
-  "Pawn",
-  "Rook",
-  "Knight",
-  "Bishop",
-  "Queen",
-  "King"
-};
-std::array<std::string, 2> colorTypes = {
-  "White",
-  "Black"
-};
-
-// Only for Printing Board Purpose
-std::array<std::string, 7> pieceDisplay = {
-  "|      ",
-  "| Pawn ",
-  "| Rook ",
-  "|Knight",
-  "|Bishop",
-  "| Queen",
-  "| King "
-};
-std::array<std::string, 2> colorDisplay = {
-  "| White",
-  "| Black"
-};
-
-void addPiece(
-  std::array<std::array<int, 8>, 8> &board,
-  std::string color,
-  std::string piece,
-  int rank,
-  char file
-) {
-
-  int pieceValue;
-
-  for(int i = 0; i<pieceTypes.size(); i++) {
-    if(pieceTypes[i] == piece)
-      pieceValue = i;
-  }
-
-  for(int i = 0; i<colorDisplay.size(); i++) {
-    if(colorTypes[i] == color)
-      pieceValue += (i * 8);
-  }
-
-  board[8 - rank][int(file - 'a')] = pieceValue;
-}
+/* History of the played moves in the match */
+std::vector<std::string> playedMoves;
 
 void initializeBoard(std::array<std::array<int, 8>, 8> &board) {
   //Black
