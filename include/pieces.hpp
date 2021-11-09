@@ -17,9 +17,10 @@ std::array<std::string, 7> pieceTypes = {
   "Queen",
   "King"
 };
-std::array<std::string, 2> colorTypes = {
+std::array<std::string, 3> colorTypes = {
   "White",
-  "Black"
+  "Black",
+  ""
 };
 
 // Only for Printing Board Purpose
@@ -362,7 +363,7 @@ std::vector<std::vector<int>> (*legalMovesFunctions[7])(
 };
 
 // Adding a piece to the chess board
-void addPiece(
+int addPiece(
   std::array<std::array<int, 8>, 8> &board,
   std::string color,
   std::string piece,
@@ -383,4 +384,6 @@ void addPiece(
   }
 
   board[8 - rank][int(file - 'a')] = pieceValue;
+
+  return pieceValue;
 }

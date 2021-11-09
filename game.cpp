@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <array>
 #include <vector>
+#include <string>
 
 #include "include/board.hpp"
 
@@ -36,8 +37,9 @@ int main() {
   std::array<std::array<int, 8>, 8> board = {0};
   initializeBoard(board);
 
-  printBoard(board);
 
+  /*! Temporary */
+  printBoard(board);
   std::vector<std::vector<int>> moves = legalMovesFunctions[6](board, 1, 'e');
   for(int i = 0; i<moves.size(); i++) {
     std::cout<<(8 - moves[i][0])<<" "<<char(moves[i][1] + 'a')<<std::endl;
