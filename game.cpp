@@ -22,13 +22,22 @@ int main() {
    * @brief Selecting Game mode from options:
    * 1. Player vs Player
    */
-  int gameMode = 2;
-  while(gameMode < 1 || gameMode > 1) {
+  int gameMode = 3;
+  int playerMode = 2;
+  while(gameMode < 1 || gameMode > 2) {
+    CLEAR;
+    std::cout<<"1. Visual"<<std::endl;
+    std::cout<<"2. Blindfold"<<std::endl;
+    std::cout<<"Please select a game mode > ";
+    std::cin>>gameMode;
+  }
+  CLEAR;
+  while(playerMode < 1 || playerMode > 1) {
     CLEAR;
     std::cout<<"1. Player vs Player"<<std::endl;
     // std::cout<<"2. Player vs Bot"<<std::endl;
-    std::cout<<"Please select a game mode > ";
-    std::cin>>gameMode;
+    std::cout<<"Please select a player mode > ";
+    std::cin>>playerMode;
   }
   CLEAR;
 
@@ -41,7 +50,9 @@ int main() {
   int player = 0; //temporary
   while(!gameOver) {
     CLEAR;
-    printBoard(board);
+    
+    if(gameMode != 2)
+      printBoard(board);
 
 
     // Getting move commands
@@ -62,9 +73,14 @@ int main() {
 
       if(wrongCommand)
         std::cout<<"Incorrect command"<<std::endl<<std::endl;
-    } while(wrongCommand);
+    } while(wrongCommand && gameWin == 3);
 
     player = !player;
+
+    if(gameWin != 3) {
+      std::cout<<((gameWin == 0) ? "White" : "Black")<<" Wins!!"<<std::endl;
+      break;
+    }
   }
   return 0;
 }
