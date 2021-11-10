@@ -169,7 +169,6 @@ std::vector<std::vector<int>> rookMoves(
       break;
     }
   }
-
   return moves;
 }
 

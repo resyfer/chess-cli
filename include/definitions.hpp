@@ -3,6 +3,7 @@
 #include <array>
 #include <vector>
 #include <string>
+#include <limits.h>
 
 #define WHITE 0
 #define BLACK 1

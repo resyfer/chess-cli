@@ -33,20 +33,26 @@ int main() {
   std::array<std::array<int, 8>, 8> board = {0};
   initializeBoard(board);
 
-  bool gameOver = false; //temporary
-  int player = 0; //temporary
-  while(!gameOver) {
+  int player = 0;
+  while(true) {
     CLEAR;
     
     if(gameMode != 2)
       printBoard(board);
 
+    //Check Warning
+    if(kingCheck[0] == 1) {
+      std::cout<<"White King in Check!!!"<<std::endl;
+    }
+    if (kingCheck[1] == 1) {
+      std::cout<<"Black King in Check!!!"<<std::endl;
+    }
 
     // Getting move commands
     bool wrongCommand = false;
       std::string location, destination;
 
-      std::cout<<"[Player "<<((player == WHITE) ? "1" : "2")<<"]"<<std::endl;
+      std::cout<<"[Player "<<(player + 1)<<"]"<<std::endl;
       std::cout<<"Commands to be given like e4, d2, etc."<<std::endl<<std::endl;
 
     do {
@@ -65,8 +71,9 @@ int main() {
     player = !player;
 
     // Game End Condition
-    CLEAR;
     win(board);
+    CLEAR;
+
     if(gameWin != 3) {
       printBoard(board);
 
