@@ -1,6 +1,4 @@
-#define WHITE 0
-#define BLACK 1
-#define NO_COLOR 2
+#include "definitions.hpp"
 
 /**
  * Last 3 bits of pieceValue shows

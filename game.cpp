@@ -1,17 +1,4 @@
-#include <iostream>
-#include <stdlib.h>
-#include <array>
-#include <vector>
-#include <string>
-
 #include "include/board.hpp"
-
-//Defining CLEAR command for various OSes
-#ifdef _WIN32
-#define CLEAR system("cls")
-#else
-#define CLEAR system("clear")
-#endif
 
 int main() {
 

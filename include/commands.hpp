@@ -10,6 +10,35 @@ std::vector<int> positionToRankFile(
   return coordinates;
 }
 
+// 0 -> Error in promotion. 1 -> Success
+bool pawnPromotion(
+  std::array<std::array<int, 8>, 8> &board,
+  std::string newPiece,
+  int rank,
+  char file
+) {
+  int elementValue = board[8 - rank][int(file - 'a')];
+
+  int color = colorValue(elementValue);
+
+  if(
+    (color == NO_COLOR) ||
+    (color == WHITE && rank != 8) ||
+    (color == BLACK && rank != 1)
+  ) return false;
+
+  board[8 - rank][int(file - 'a')] =
+  addPiece(
+    board,
+    colorTypes[color],
+    newPiece,
+    rank,
+    file
+  );
+
+  return true;
+}
+
 bool movePiece(
   std::array<std::array<int, 8>, 8> &board,
   int player,
@@ -57,34 +86,30 @@ bool movePiece(
   board[destination[0]][destination[1]] = board[location[0]][location[1]];
   board[location[0]][location[1]] = 0;
 
-  return true;
-}
-
-// 0 -> Error in promotion. 1 -> Success
-bool pawnPromotion(
-  std::array<std::array<int, 8>, 8> &board,
-  std::string newPiece,
-  int rank,
-  char file
-) {
-  int elementValue = board[8 - rank][int(file - 'a')];
-
-  int color = colorValue(elementValue);
-
+  //Check for promotion
   if(
-    (color == NO_COLOR) ||
-    (color == WHITE && rank != 8) ||
-    (color == BLACK && rank != 1)
-  ) return false;
+    pieceIndex(elementValue) == 1 &&
+    (destination[0] == 0 || destination[0] == 7)
+  ) {
+    int promotionChoice = 5;
+    
+    std::array<std::string, 4> choices = {"Bishop", "Knight", "Rook", "Queen"};
 
-  board[8 - rank][int(file - 'a')] =
-  addPiece(
-    board,
-    colorTypes[color],
-    newPiece,
-    rank,
-    file
-  );
+    
+    // Promotion Choice Input
+    while(promotionChoice < 1 || promotionChoice > 4) {
+      CLEAR;
+      
+      for(int i = 0; i<choices.size(); i++) 
+        std::cout<<(i+1)<<". "<<choices[i]<<std::endl;
+        
+      std::cout<<"Please promote your pawn 1/2/3/4 > ";
+      std::cin>>promotionChoice;
+    }
+  
+    pawnPromotion(board, choices[promotionChoice - 1], int(endingPosition[1] - '0'), endingPosition[0]);
+
+  }
 
   return true;
 }
