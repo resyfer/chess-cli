@@ -64,10 +64,19 @@ int main() {
 
     player = !player;
 
+    // Game End Condition
     CLEAR;
+    win(board);
     if(gameWin != 3) {
       printBoard(board);
-      std::cout<<((gameWin == 0) ? "White" : "Black")<<" Wins!!"<<std::endl;
+
+      if(gameWin == 0)
+        std::cout<<"White Wins!!!"<<std::endl;
+      else if(gameWin == 1)
+        std::cout<<"Black Wins!!!"<<std::endl;
+      else if(gameWin == 2)
+        std::cout<<"It's a Draw!!!"<<std::endl;
+
       break;
     }
   }

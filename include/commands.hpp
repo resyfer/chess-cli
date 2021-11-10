@@ -1,6 +1,4 @@
-#include "pieces.hpp"
-
-int gameWin = 3; //0 -> White win, 1 -> Black win, 2 -> Draw, 3 -> No Win
+#include "win.hpp"
 
 // {row, column} (value from 0, 0 in array)
 std::vector<int> positionToRankFile(
@@ -77,10 +75,6 @@ bool movePiece(
 
   if(!legal)
     return false;
-
-  // Check Game Win
-  if(pieceIndex(board[destination[0]][destination[1]]) == 6)
-    gameWin = player;
 
   //Moving Piece
   board[destination[0]][destination[1]] = board[location[0]][location[1]];
