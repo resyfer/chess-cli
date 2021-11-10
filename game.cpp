@@ -77,7 +77,9 @@ int main() {
 
     player = !player;
 
+    CLEAR;
     if(gameWin != 3) {
+      printBoard(board);
       std::cout<<((gameWin == 0) ? "White" : "Black")<<" Wins!!"<<std::endl;
       break;
     }
