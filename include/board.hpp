@@ -1,7 +1,8 @@
 #include "commands.hpp"
 
 /* History of the played moves in the match */
-std::vector<std::string> playedMoves;
+std::vector<std::vector<std::string>> playedMoves;
+// [{color, piece, startPosition, endPosition}]
 
 void initializeBoard(std::array<std::array<int, 8>, 8> &board) {
   //Black
