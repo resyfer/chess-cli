@@ -6,7 +6,11 @@ int main() {
   std::cout<<"A Chess game in your CLI"<<std::endl;
 
   /**
-   * @brief Selecting Game mode from options:
+   * Selecting Game mode from options:
+   * 1. Visual
+   * 2. Blindfold
+   * 
+   * Selecting player mode from options:
    * 1. Player vs Player
    */
   int gameMode = 3;
